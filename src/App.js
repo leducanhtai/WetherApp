@@ -38,7 +38,7 @@ function App() {
     return (
         <div className="app-container">
             <video className="bg-video" autoPlay muted loop playsInline>
-                <source src="/background.webm" type="video/webm" />
+                <source src={`${process.env.PUBLIC_URL}/background.webm`} type="video/webm" />
             </video>
             <div className="bg-overlay"></div>
             {/* Header */}

@@ -16,22 +16,24 @@ const weatherGradients = {
     Clouds: 'linear-gradient(135deg, #1e3a5f 0%, #2d5a8a 50%, #f59e0b 100%)',
 };
 
+const BASE = process.env.PUBLIC_URL || '';
+
 const weatherVideos = {
-    Thunderstorm: '/rain.webm',
-    Drizzle: '/rain.webm',
-    Rain: '/rain.webm',
-    Snow: '/snow.webm',
-    Mist: '/mist.webm',
-    Smoke: '/mist.webm',
-    Haze: '/mist.webm',
-    Dust: '/mist.webm',
-    Fog: '/mist.webm',
-    Sand: '/mist.webm',
-    Ash: '/mist.webm',
-    Squall: '/rain.webm',
-    Tornado: '/rain.webm',
-    Clear: '/clear.webm',
-    Clouds: '/cloudy(night).webm',
+    Thunderstorm: `${BASE}/rain.webm`,
+    Drizzle: `${BASE}/rain.webm`,
+    Rain: `${BASE}/rain.webm`,
+    Snow: `${BASE}/snow.webm`,
+    Mist: `${BASE}/mist.webm`,
+    Smoke: `${BASE}/mist.webm`,
+    Haze: `${BASE}/mist.webm`,
+    Dust: `${BASE}/mist.webm`,
+    Fog: `${BASE}/mist.webm`,
+    Sand: `${BASE}/mist.webm`,
+    Ash: `${BASE}/mist.webm`,
+    Squall: `${BASE}/rain.webm`,
+    Tornado: `${BASE}/rain.webm`,
+    Clear: `${BASE}/clear.webm`,
+    Clouds: `${BASE}/cloudy(night).webm`,
 };
 
 export const getWeatherGradient = (weatherMain) => {

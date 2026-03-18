@@ -34,7 +34,7 @@ const AirQuality = ({ data, wind, weatherMain }) => {
                         </div>
                         <div className="aq-animation">
                             <video
-                                src="/Airplane.webm"
+                                src={`${process.env.PUBLIC_URL}/Airplane.webm`}
                                 autoPlay
                                 loop
                                 muted
