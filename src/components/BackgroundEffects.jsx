@@ -1,4 +1,6 @@
 import React, { useMemo } from 'react';
+import PropTypes from 'prop-types';
+import './BackgroundEffects.css';
 
 // Generate deterministic pseudo-random values from a seed
 const seeded = (seed) => {
@@ -220,5 +222,10 @@ const BackgroundEffects = React.memo(({ weatherMain, isNight }) => {
         </div>
     );
 });
+
+BackgroundEffects.propTypes = {
+    weatherMain: PropTypes.string,
+    isNight: PropTypes.bool,
+};
 
 export default BackgroundEffects;

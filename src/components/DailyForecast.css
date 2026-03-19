@@ -1,0 +1,98 @@
+/* ========== WEATHER PREDICTION ========== */
+.prediction-card {
+    background: var(--card-bg);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: var(--border-radius);
+    padding: 25px;
+    box-shadow: var(--shadow);
+    display: flex;
+    flex-direction: column;
+}
+
+.prediction-card h3 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 15px;
+}
+
+.prediction-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    flex: 1;
+}
+
+.prediction-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 12px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+    transition: background 0.2s;
+}
+
+.prediction-item:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.prediction-icon {
+    width: 40px;
+    height: 40px;
+}
+
+.prediction-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.prediction-date {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+}
+
+.prediction-desc {
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+.prediction-temps {
+    font-weight: 600;
+}
+
+.temp-high {
+    color: var(--accent-orange);
+}
+
+.temp-low {
+    color: var(--text-muted);
+}
+
+.temp-sep {
+    color: var(--text-muted);
+}
+
+.next-days-btn {
+    margin-top: 15px;
+    background: var(--accent-orange);
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 15px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: background 0.3s;
+    width: 100%;
+}
+
+.next-days-btn:hover {
+    background: #e08900;
+}

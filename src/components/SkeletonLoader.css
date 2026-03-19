@@ -1,0 +1,112 @@
+/* ========== SKELETON LOADER ========== */
+.skeleton-grid {
+    pointer-events: none;
+}
+
+.skeleton-card {
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--border-radius);
+    padding: 25px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.skeleton-card-group {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.skeleton-lg {
+    min-height: 300px;
+}
+.skeleton-md {
+    min-height: 200px;
+}
+.skeleton-sm {
+    min-height: 70px;
+}
+.skeleton-wide {
+    min-height: 180px;
+}
+
+.skeleton-line {
+    height: 14px;
+    border-radius: 8px;
+    background: linear-gradient(
+        90deg,
+        rgba(255, 255, 255, 0.06) 25%,
+        rgba(255, 255, 255, 0.14) 50%,
+        rgba(255, 255, 255, 0.06) 75%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+}
+
+.skeleton-w30 {
+    width: 30%;
+}
+.skeleton-w40 {
+    width: 40%;
+}
+.skeleton-w50 {
+    width: 50%;
+}
+.skeleton-w60 {
+    width: 60%;
+}
+.skeleton-w70 {
+    width: 70%;
+}
+.skeleton-w80 {
+    width: 80%;
+}
+
+.skeleton-block {
+    flex: 1;
+    min-height: 80px;
+    border-radius: 14px;
+    background: linear-gradient(
+        90deg,
+        rgba(255, 255, 255, 0.06) 25%,
+        rgba(255, 255, 255, 0.14) 50%,
+        rgba(255, 255, 255, 0.06) 75%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+}
+
+.skeleton-block-sm {
+    min-height: 40px;
+}
+
+.skeleton-row {
+    display: flex;
+    gap: 10px;
+}
+
+.skeleton-pill {
+    flex: 1;
+    height: 50px;
+    border-radius: 15px;
+    background: linear-gradient(
+        90deg,
+        rgba(255, 255, 255, 0.06) 25%,
+        rgba(255, 255, 255, 0.14) 50%,
+        rgba(255, 255, 255, 0.06) 75%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+}
+
+@keyframes shimmer {
+    0% {
+        background-position: 200% 0;
+    }
+    100% {
+        background-position: -200% 0;
+    }
+}

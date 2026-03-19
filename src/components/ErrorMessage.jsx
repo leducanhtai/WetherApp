@@ -1,5 +1,7 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { CloudOff, WifiOff, MapPin, AlertTriangle } from 'lucide-react';
+import './ErrorMessage.css';
 
 const icons = {
     'not-found': CloudOff,
@@ -23,6 +25,14 @@ const ErrorMessage = ({ error, onRetry }) => {
             )}
         </div>
     );
+};
+
+ErrorMessage.propTypes = {
+    error: PropTypes.shape({
+        type: PropTypes.string,
+        message: PropTypes.string.isRequired,
+    }),
+    onRetry: PropTypes.func,
 };
 
 export default React.memo(ErrorMessage);

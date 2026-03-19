@@ -1,7 +1,9 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { convertTemp, getTempColor } from '../utils/unitConversion';
 import { getWeatherGradient } from '../utils/weatherGradients';
 import WeatherAnimation from './WeatherAnimation';
+import './CurrentWeather.css';
 
 const CurrentWeather = React.memo(({ data, isMetric }) => {
     if (!data) return null;
@@ -64,5 +66,14 @@ const CurrentWeather = React.memo(({ data, isMetric }) => {
         </div>
     );
 });
+
+CurrentWeather.propTypes = {
+    data: PropTypes.shape({
+        main: PropTypes.object.isRequired,
+        weather: PropTypes.array.isRequired,
+        visibility: PropTypes.number.isRequired,
+    }),
+    isMetric: PropTypes.bool.isRequired,
+};
 
 export default CurrentWeather;

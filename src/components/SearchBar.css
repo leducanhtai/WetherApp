@@ -1,0 +1,112 @@
+/* ========== SEARCH BAR ========== */
+.search-container {
+    flex: 1;
+    max-width: 400px;
+    position: relative;
+}
+
+.search-bar {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(12px);
+    padding: 12px 20px;
+    border-radius: 50px;
+    box-shadow: var(--shadow);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.search-bar input {
+    border: none;
+    outline: none;
+    width: 100%;
+    font-size: 0.95rem;
+    font-family: 'Poppins', sans-serif;
+    color: white;
+    background: transparent;
+}
+
+.search-bar input::placeholder {
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.search-icon {
+    color: var(--accent-orange);
+    cursor: pointer;
+    flex-shrink: 0;
+}
+
+/* ========== LOCATE BUTTON ========== */
+.locate-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: none;
+    border: none;
+    color: var(--accent-orange);
+    cursor: pointer;
+    padding: 4px;
+    border-radius: 50%;
+    transition: background 0.2s;
+    flex-shrink: 0;
+}
+
+.locate-btn:hover {
+    background: rgba(255, 255, 255, 0.15);
+}
+
+/* ========== AUTOCOMPLETE ========== */
+.autocomplete-list {
+    position: absolute;
+    top: calc(100% + 6px);
+    left: 0;
+    right: 0;
+    background: rgba(30, 30, 60, 0.95);
+    backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 16px;
+    overflow: hidden;
+    z-index: 100;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    list-style: none;
+    padding: 6px 0;
+    margin: 0;
+}
+
+.autocomplete-item {
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.8);
+    transition: background 0.15s;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.autocomplete-item:hover,
+.autocomplete-item.active {
+    background: rgba(255, 255, 255, 0.12);
+    color: white;
+}
+
+.autocomplete-icon {
+    flex-shrink: 0;
+    opacity: 0.5;
+}
+
+.autocomplete-name {
+    font-weight: 600;
+}
+
+.autocomplete-state {
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.autocomplete-country {
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    margin-left: auto;
+}

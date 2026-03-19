@@ -1,4 +1,5 @@
 import React from 'react';
+import './SkeletonLoader.css';
 
 const SkeletonLoader = () => (
     <div className="dashboard-grid skeleton-grid">

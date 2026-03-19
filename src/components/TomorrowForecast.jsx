@@ -1,7 +1,9 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { convertTemp, getTempColor } from '../utils/unitConversion';
 import { getWeatherGradient } from '../utils/weatherGradients';
 import WeatherAnimation from './WeatherAnimation';
+import './TomorrowForecast.css';
 
 const TomorrowForecast = React.memo(({ data, isMetric }) => {
     // Find tomorrow's noon forecast
@@ -41,5 +43,13 @@ const TomorrowForecast = React.memo(({ data, isMetric }) => {
         </div>
     );
 });
+
+TomorrowForecast.propTypes = {
+    data: PropTypes.shape({
+        list: PropTypes.array.isRequired,
+        city: PropTypes.shape({ name: PropTypes.string }),
+    }).isRequired,
+    isMetric: PropTypes.bool.isRequired,
+};
 
 export default TomorrowForecast;

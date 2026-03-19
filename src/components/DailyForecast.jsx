@@ -1,6 +1,8 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { format } from 'date-fns';
 import { convertTemp, getTempColor } from '../utils/unitConversion';
+import './DailyForecast.css';
 
 const DailyForecast = React.memo(({ data, isMetric }) => {
     const dailyData = data.list
@@ -48,5 +50,10 @@ const DailyForecast = React.memo(({ data, isMetric }) => {
         </div>
     );
 });
+
+DailyForecast.propTypes = {
+    data: PropTypes.shape({ list: PropTypes.array.isRequired }).isRequired,
+    isMetric: PropTypes.bool.isRequired,
+};
 
 export default DailyForecast;

@@ -1,6 +1,8 @@
 import React, { useState, useMemo } from 'react';
+import PropTypes from 'prop-types';
 import { AreaChart, Area, XAxis, YAxis, Tooltip, ResponsiveContainer } from 'recharts';
 import { convertTemp } from '../utils/unitConversion';
+import './HourlyForecast.css';
 
 const TemperatureIcon = () => (
     <svg
@@ -179,5 +181,10 @@ const HourlyForecast = React.memo(({ data, isMetric }) => {
         </div>
     );
 });
+
+HourlyForecast.propTypes = {
+    data: PropTypes.shape({ list: PropTypes.array.isRequired }).isRequired,
+    isMetric: PropTypes.bool.isRequired,
+};
 
 export default HourlyForecast;

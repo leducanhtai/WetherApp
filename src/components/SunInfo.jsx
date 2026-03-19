@@ -1,5 +1,7 @@
 import React, { useMemo } from 'react';
+import PropTypes from 'prop-types';
 import { convertTemp } from '../utils/unitConversion';
+import './SunInfo.css';
 
 const SunInfo = React.memo(({ data, isMetric }) => {
     const sys = data?.sys;
@@ -116,5 +118,15 @@ const SunInfo = React.memo(({ data, isMetric }) => {
         </div>
     );
 });
+
+SunInfo.propTypes = {
+    data: PropTypes.shape({
+        sys: PropTypes.object,
+        main: PropTypes.object,
+        weather: PropTypes.array,
+        name: PropTypes.string,
+    }),
+    isMetric: PropTypes.bool.isRequired,
+};
 
 export default SunInfo;

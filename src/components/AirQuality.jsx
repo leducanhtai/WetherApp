@@ -1,6 +1,8 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Wind } from 'lucide-react';
 import { getAirQualityGradient } from '../utils/weatherGradients';
+import './AirQuality.css';
 
 const aqLabels = ['Good', 'Fair', 'Moderate', 'Poor', 'Hazardous'];
 const aqColors = ['#4ade80', '#facc15', '#fb923c', '#f87171', '#a855f7'];
@@ -65,5 +67,11 @@ const AirQuality = React.memo(({ data, wind, weatherMain }) => {
         </div>
     );
 });
+
+AirQuality.propTypes = {
+    data: PropTypes.object,
+    wind: PropTypes.shape({ deg: PropTypes.number }),
+    weatherMain: PropTypes.string,
+};
 
 export default AirQuality;
