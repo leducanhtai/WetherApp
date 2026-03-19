@@ -1,8 +1,9 @@
 import React from 'react';
-import { convertTemp } from '../utils/unitConversion';
-import { getWeatherGradient, getWeatherVideo } from '../utils/weatherGradients';
+import { convertTemp, getTempColor } from '../utils/unitConversion';
+import { getWeatherGradient } from '../utils/weatherGradients';
+import WeatherAnimation from './WeatherAnimation';
 
-const TomorrowForecast = ({ data, isMetric }) => {
+const TomorrowForecast = React.memo(({ data, isMetric }) => {
     // Find tomorrow's noon forecast
     const tomorrow =
         data.list.find((item) => {
@@ -15,7 +16,8 @@ const TomorrowForecast = ({ data, isMetric }) => {
 
     const cityName = data.city?.name || 'Unknown';
     const gradient = getWeatherGradient(tomorrow.weather[0].main);
-    const videoSrc = getWeatherVideo(tomorrow.weather[0].main);
+    const isNight = tomorrow.weather[0].icon.endsWith('n');
+    const tempColor = getTempColor(tomorrow.main.temp);
 
     return (
         <div className="tomorrow-card" style={{ background: gradient }}>
@@ -23,17 +25,14 @@ const TomorrowForecast = ({ data, isMetric }) => {
                 <span className="tomorrow-label">Tomorrow</span>
                 <h2 className="tomorrow-city">{cityName}</h2>
                 <div className="tomorrow-illustration">
-                    <video
-                        src={videoSrc}
-                        autoPlay
-                        loop
-                        muted
-                        playsInline
-                        className="tomorrow-video-icon"
+                    <WeatherAnimation
+                        weatherMain={tomorrow.weather[0].main}
+                        size={140}
+                        isNight={isNight}
                     />
                 </div>
                 <div className="tomorrow-temp">
-                    <h1>
+                    <h1 style={{ color: tempColor }}>
                         {convertTemp(tomorrow.main.temp, isMetric)}°{isMetric ? 'C' : 'F'}
                     </h1>
                 </div>
@@ -41,6 +40,6 @@ const TomorrowForecast = ({ data, isMetric }) => {
             </div>
         </div>
     );
-};
+});
 
 export default TomorrowForecast;

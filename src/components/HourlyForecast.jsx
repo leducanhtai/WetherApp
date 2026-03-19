@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import { AreaChart, Area, XAxis, YAxis, Tooltip, ResponsiveContainer } from 'recharts';
 import { convertTemp } from '../utils/unitConversion';
 
@@ -53,7 +53,7 @@ const METRICS = {
     humidity: { key: 'humidity', label: 'Humidity', unit: '%', color: '#06b6d4' },
 };
 
-const HourlyForecast = ({ data, isMetric }) => {
+const HourlyForecast = React.memo(({ data, isMetric }) => {
     const [activeMetric, setActiveMetric] = useState('temp');
     const todayData = data.list.slice(0, 8);
     const metric = METRICS[activeMetric];
@@ -70,12 +70,30 @@ const HourlyForecast = ({ data, isMetric }) => {
         }
     };
 
-    const chartData = [
-        { period: 'Morning', value: getValue(todayData[0]), icon: todayData[0]?.weather[0].icon },
-        { period: 'Afternoon', value: getValue(todayData[2]), icon: todayData[2]?.weather[0].icon },
-        { period: 'Evening', value: getValue(todayData[4]), icon: todayData[4]?.weather[0].icon },
-        { period: 'Night', value: getValue(todayData[6]), icon: todayData[6]?.weather[0].icon },
-    ];
+    const chartData = useMemo(
+        () => [
+            {
+                period: 'Morning',
+                value: getValue(todayData[0]),
+                icon: todayData[0]?.weather[0].icon,
+            },
+            {
+                period: 'Afternoon',
+                value: getValue(todayData[2]),
+                icon: todayData[2]?.weather[0].icon,
+            },
+            {
+                period: 'Evening',
+                value: getValue(todayData[4]),
+                icon: todayData[4]?.weather[0].icon,
+            },
+            { period: 'Night', value: getValue(todayData[6]), icon: todayData[6]?.weather[0].icon },
+        ],
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+        [activeMetric, isMetric, data],
+    );
+
+    const gradientId = `metricGradient-${activeMetric}`;
 
     const CustomDot = (props) => {
         const { cx, cy, index } = props;
@@ -123,7 +141,7 @@ const HourlyForecast = ({ data, isMetric }) => {
                         margin={{ top: 40, right: 20, left: 20, bottom: 0 }}
                     >
                         <defs>
-                            <linearGradient id="metricGradient" x1="0" y1="0" x2="0" y2="1">
+                            <linearGradient id={gradientId} x1="0" y1="0" x2="0" y2="1">
                                 <stop offset="5%" stopColor={metric.color} stopOpacity={0.3} />
                                 <stop offset="95%" stopColor={metric.color} stopOpacity={0} />
                             </linearGradient>
@@ -141,7 +159,7 @@ const HourlyForecast = ({ data, isMetric }) => {
                             dataKey="value"
                             stroke={metric.color}
                             strokeWidth={3}
-                            fill="url(#metricGradient)"
+                            fill={`url(#${gradientId})`}
                             dot={<CustomDot />}
                         />
                     </AreaChart>
@@ -160,6 +178,6 @@ const HourlyForecast = ({ data, isMetric }) => {
             </div>
         </div>
     );
-};
+});
 
 export default HourlyForecast;

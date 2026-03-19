@@ -1,13 +1,15 @@
 import React from 'react';
-import { convertTemp } from '../utils/unitConversion';
-import { getWeatherGradient, getWeatherVideo } from '../utils/weatherGradients';
+import { convertTemp, getTempColor } from '../utils/unitConversion';
+import { getWeatherGradient } from '../utils/weatherGradients';
+import WeatherAnimation from './WeatherAnimation';
 
-const CurrentWeather = ({ data, isMetric }) => {
+const CurrentWeather = React.memo(({ data, isMetric }) => {
     if (!data) return null;
 
     const { main, weather, visibility } = data;
     const gradient = getWeatherGradient(weather[0].main);
-    const videoSrc = getWeatherVideo(weather[0].main);
+    const isNight = weather[0].icon.endsWith('n');
+    const tempColor = getTempColor(main.temp);
 
     return (
         <div className="weather-card" style={{ background: gradient }}>
@@ -25,7 +27,7 @@ const CurrentWeather = ({ data, isMetric }) => {
                     <div className="weather-card-main">
                         <div className="weather-card-left">
                             <div className="weather-card-temp">
-                                <h1>
+                                <h1 style={{ color: tempColor }}>
                                     {convertTemp(main.temp, isMetric)}°{isMetric ? 'C' : 'F'}
                                 </h1>
                                 <span className="feels-like">
@@ -35,13 +37,10 @@ const CurrentWeather = ({ data, isMetric }) => {
                             <p className="weather-desc">{weather[0].description}</p>
                         </div>
                         <div className="weather-card-animation">
-                            <video
-                                src={videoSrc}
-                                autoPlay
-                                loop
-                                muted
-                                playsInline
-                                className="weather-video-icon"
+                            <WeatherAnimation
+                                weatherMain={weather[0].main}
+                                size={160}
+                                isNight={isNight}
                             />
                         </div>
                     </div>
@@ -64,6 +63,6 @@ const CurrentWeather = ({ data, isMetric }) => {
             </div>
         </div>
     );
-};
+});
 
 export default CurrentWeather;

@@ -1,12 +1,18 @@
 import React from 'react';
+import { Wind } from 'lucide-react';
 import { getAirQualityGradient } from '../utils/weatherGradients';
 
-const AirQuality = ({ data, wind, weatherMain }) => {
+const aqLabels = ['Good', 'Fair', 'Moderate', 'Poor', 'Hazardous'];
+const aqColors = ['#4ade80', '#facc15', '#fb923c', '#f87171', '#a855f7'];
+
+const AirQuality = React.memo(({ data, wind, weatherMain }) => {
     if (!data || !data.list || !data.list[0]) return null;
 
     const aqi = data.list[0].main.aqi;
     const pm25 = Math.round(data.list[0].components.pm2_5);
     const gradient = getAirQualityGradient(weatherMain);
+    const label = aqLabels[aqi - 1] || 'Unknown';
+    const color = aqColors[aqi - 1] || '#fff';
 
     const getWindDirection = (deg) => {
         const directions = ['North', 'NE', 'East', 'SE', 'South', 'SW', 'West', 'NW'];
@@ -28,31 +34,36 @@ const AirQuality = ({ data, wind, weatherMain }) => {
                         <div className="aq-left">
                             <div className="aq-value">
                                 <h1>{pm25}</h1>
-                                <span className="aq-badge">AQI</span>
+                                <span className="aq-badge" style={{ background: color }}>
+                                    {label}
+                                </span>
                             </div>
                             <p className="aq-wind">{getWindDirection(wind?.deg || 0)}</p>
                         </div>
                         <div className="aq-animation">
-                            <video
-                                src={`${process.env.PUBLIC_URL}/Airplane.webm`}
-                                autoPlay
-                                loop
-                                muted
-                                playsInline
-                                className="aq-video-icon"
-                            />
+                            <Wind size={100} strokeWidth={1} style={{ opacity: 0.25 }} />
                         </div>
                     </div>
 
-                    <div className="aq-scale">
-                        <button className={`aq-btn ${aqi <= 2 ? 'active' : ''}`}>Good</button>
-                        <button className={`aq-btn ${aqi === 3 ? 'active' : ''}`}>Standard</button>
-                        <button className={`aq-btn ${aqi >= 4 ? 'active' : ''}`}>Hazardous</button>
+                    {/* AQI scale bar */}
+                    <div className="aq-scale-bar">
+                        {aqLabels.map((l, i) => (
+                            <div
+                                key={l}
+                                className={`aq-scale-segment${aqi === i + 1 ? ' active' : ''}`}
+                                style={{
+                                    background: aqColors[i],
+                                    opacity: aqi === i + 1 ? 1 : 0.35,
+                                }}
+                            >
+                                <span>{l}</span>
+                            </div>
+                        ))}
                     </div>
                 </div>
             </div>
         </div>
     );
-};
+});
 
 export default AirQuality;
